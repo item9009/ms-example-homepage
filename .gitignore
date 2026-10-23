@@ -1,0 +1,15 @@
+# 민감 정보
+wp-content/nfwlog/
+wp-config.php
+.htaccess
+
+# 업로드/캐시
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+
+# 기타
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
