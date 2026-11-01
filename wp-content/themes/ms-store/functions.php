@@ -14,7 +14,7 @@ if ( ! defined( 'MS_STORE_FONT_URL' ) ) {
  * wp-config.php에서 미리 정의하면 그 값이 우선 적용됩니다.
  */
 if ( ! defined( 'MS_STORE_KAKAO_MAP_APP_KEY' ) ) {
-	define( 'MS_STORE_KAKAO_MAP_APP_KEY', '' );
+	define( 'MS_STORE_KAKAO_MAP_APP_KEY', '184a4e1cdc61d0f3af18465d18376108' );
 }
 
 /**
