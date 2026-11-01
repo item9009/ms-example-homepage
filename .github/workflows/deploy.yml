@@ -1,8 +1,6 @@
 name: Deploy to Cafe24
 
-on:
-  push:
-    branches: [master]
+on:    
   workflow_dispatch:
 
 jobs:
@@ -25,7 +23,7 @@ jobs:
             set net:max-retries 2;
             set net:timeout 20;
             open --env-password -u ${{ secrets.SSH_USER }} -p ${{ secrets.SSH_PORT }} sftp://${{ secrets.SSH_HOST }};
-            mirror -R --dry-run --verbose --parallel=5 \
+            mirror -R --verbose --parallel=5 \
               --exclude '^uploads/' \
               --exclude '^cache/' \
               --exclude '^upgrade/' \
