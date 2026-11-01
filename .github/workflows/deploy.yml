@@ -1,0 +1,33 @@
+name: Deploy to Cafe24
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 코드 가져오기
+        uses: actions/checkout@v4
+
+      - name: lftp 설치
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: 카페24로 업로드 (SFTP)
+        env:
+          LFTP_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+        run: |
+          lftp -c "
+            set sftp:auto-confirm yes;
+            set net:max-retries 2;
+            set net:timeout 20;
+            open --env-password -u ${{ secrets.SSH_USER }} -p ${{ secrets.SSH_PORT }} sftp://${{ secrets.SSH_HOST }};
+            mirror -R --dry-run --verbose --parallel=5 \
+              --exclude '^uploads/' \
+              --exclude '^cache/' \
+              --exclude '^upgrade/' \
+              ./wp-content/ www/wp-content/;
+          "
